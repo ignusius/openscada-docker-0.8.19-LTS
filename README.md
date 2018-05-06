@@ -5,3 +5,5 @@ http://oscada.org
 
 # Install  
 ```docker pull iritoasutp/openscada-docker-0.8-lts```
+
+Maintainer: Alexander Komarov ignusius@gmail.com
