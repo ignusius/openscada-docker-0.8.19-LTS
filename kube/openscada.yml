@@ -1,0 +1,38 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: openscada
+  labels: {app: openscada}
+spec:
+  replicas: 1
+  template:
+    metadata: {labels: {app: openscada}}
+    spec:
+      containers:
+      - name: openscada
+        image: iritoasutp/openscada-docker-0.8-lts
+        imagePullPolicy: Always
+        command:
+        ports:
+          - containerPort: 8081
+        volumeMounts:
+          - mountPath: /root/.openscada/
+            name: nfs-vol
+      volumes:
+        - name: nfs-vol
+          persistentVolumeClaim:
+            claimName: openscada-pvc
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: openscada
+  labels: {app: openscada}
+spec:
+  type: LoadBalancer
+  selector:
+    app: openscadag
+  externalIPs:
+  - 192.168.1.18
+  ports:
+  - protocol: TCP
