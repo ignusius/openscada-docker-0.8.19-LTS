@@ -31,8 +31,8 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: openscadag
+    app: openscada
   externalIPs:
-  - 192.168.1.18
+  - 192.168.1.1
   ports:
   - protocol: TCP
